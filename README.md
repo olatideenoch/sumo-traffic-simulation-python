@@ -61,6 +61,6 @@ python traci_sumo.py
 
 ## 👤 Author
 
-Olatide Enoch
-Transport Technology Student
-Python Developer — Traffic Simulation & Analytics
+**Olatide Enoch**
+**Transport Technology Student**
+**Python Developer — Traffic Simulation & Analytics**
