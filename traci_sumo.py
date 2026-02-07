@@ -7,6 +7,7 @@ if 'SUMO_HOME' in os.environ:
 else:
     sys.exit("Please declare environment variable 'SUMO_HOME'")
 
+# import traci to connect SUMO and Python
 import traci
 
 # Define SUMO Configuration
@@ -49,6 +50,26 @@ def vehicle_distance_traveled():
         distance_traveled = traci.vehicle.getDistance('veh1')
         print(f"Vehicle distance traveled: {distance_traveled} m")
 
+# import sumolib to read the network file and calculate average speed of edges
+import sumolib
+
+net = sumolib.net.readNet('Traci.net.xml')
+
+speedsum = 0
+edgecount = 0
+avgspeed = 0
+
+# Define function to calculate average speed of all edges in the network
+def calculate_average_speed():
+    global speedsum, edgecount, avgspeed
+    for edge in net.getEdges():
+        speedsum += edge.getSpeed()
+        edgecount += 1
+
+    if edgecount > 0:
+        avgspeed = speedsum / edgecount
+    print(f"Average speed of all edges: {avgspeed} m/s")
+
 
 # Take Simulation steps until there are no more vehicles in the network
 while traci.simulation.getMinExpectedNumber() > 0:
@@ -56,6 +77,7 @@ while traci.simulation.getMinExpectedNumber() > 0:
     update_speed()
     # process_vehicle_data()
     vehicle_distance_traveled()
+    calculate_average_speed()
     
 
 # Close connection between SUMO and Traci
