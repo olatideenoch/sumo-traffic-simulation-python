@@ -55,7 +55,9 @@ pip install sumolib traci
 ---
 
 ## Run
+```bash
 python traci_sumo.py
+```
 
 ---
 
